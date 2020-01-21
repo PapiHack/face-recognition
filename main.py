@@ -11,13 +11,13 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 cap = cv2.VideoCapture(0)
 
-img = cv2.imread('images/p1.png')
+# img = cv2.imread('images/bb_moine.jpeg')
 
 while True:
     ret, frame = cap.read()
-    # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    # faces = face_cascade.detectMultiScale(gray, 1.5, 5)
-    faces, gray = fr.face_detection(frame)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.5, 5)
+    # faces, gray = fr.face_detection(frame)
     print("faces : {}".format(faces)) 
     for (x, y, w, h) in faces:
         print(x, y, w, h)
@@ -25,7 +25,7 @@ while True:
         roi_color = frame[y:y+h, x:x+w]
         #Utilisez ici un model deep learning avec tensorflow par exemple
         cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 5)
-    cv2.imshow('frame', frame)
+    cv2.imshow('Detection faciale', frame)
     if cv2.waitKey(20) & 0xFF == ord('q'):
         break
 
